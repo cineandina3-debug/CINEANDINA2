@@ -2,7 +2,63 @@
 <title>Cine Andina Formaciones</title><style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
 body{background:linear-gradient(#08111d,#111d2f);color:#fff}
-header{padding:28px;text-align:center;background:linear-gradient(135deg,#0b3d6d,#2563eb)}
+header{
+  padding:18px 24px;
+  background:linear-gradient(135deg,#07111d 0%,#0b2948 52%,#123f69 100%);
+  border-bottom:1px solid rgba(255,255,255,.14);
+  box-shadow:0 8px 28px rgba(0,0,0,.28);
+}
+.cine-header{
+  max-width:1300px;
+  margin:0 auto;
+  min-height:96px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+}
+.cine-logo{
+  width:76px;
+  height:76px;
+  flex:0 0 76px;
+  border-radius:14px;
+  object-fit:contain;
+  background:#ffffff;
+  border:2px solid rgba(255,255,255,.28);
+  box-shadow:0 5px 18px rgba(0,0,0,.35);
+  padding:7px;
+}
+.cine-brand{
+  text-align:left;
+}
+.cine-brand h1{
+  font-size:clamp(24px,3vw,36px);
+  font-weight:700;
+  letter-spacing:.8px;
+  line-height:1.15;
+  color:#fff;
+}
+.cine-brand .linea{
+  width:58px;
+  height:3px;
+  margin:10px 0 8px;
+  border-radius:3px;
+  background:#8c2e2e;
+}
+.cine-brand p{
+  font-size:13px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.78);
+}
+@media(max-width:768px){
+  header{padding:14px 16px}
+  .cine-header{min-height:82px;gap:13px}
+  .cine-logo{width:62px;height:62px;flex-basis:62px;border-radius:11px;padding:5px}
+  .cine-brand h1{font-size:22px;letter-spacing:.4px}
+  .cine-brand .linea{margin:7px 0 5px;width:44px}
+  .cine-brand p{font-size:10px;letter-spacing:1px}
+}
 .search{padding:18px;display:flex;justify-content:center}.search input{width:min(700px,95%);padding:14px;border-radius:30px;border:2px solid #2563eb;background:#1b2838;color:#fff}
 .grid{max-width:1300px;margin:auto;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
 .card{background:#1b2838;border-radius:16px;overflow:hidden}
@@ -11,9 +67,174 @@ header{padding:28px;text-align:center;background:linear-gradient(135deg,#0b3d6d,
 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:70px;height:70px;border-radius:50%;border:none;background:rgba(0,0,0,.6);color:#fff;font-size:30px}
 .info{padding:18px}#modal{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;padding:0;z-index:99}
 #modal.active{display:flex}.box{position:relative;width:min(1200px,100%);height:min(100dvh,900px);background:#000}.wrap{width:100%;height:100%}.wrap iframe{width:100%;height:100%;border:0}.close{position:absolute;top:12px;right:12px;z-index:2;width:42px;height:42px;border:none;border-radius:50%;background:#2563eb;color:#fff}
-@media(max-width:768px){.grid{grid-template-columns:1fr;padding:14px}.box{width:100vw;height:100dvh}}
+/* ===== VISTA PREVIA CINEMATOGRÁFICA ===== */
+.featured-preview{
+  grid-column:span 2;
+  position:relative;
+  min-height:420px;
+  border-radius:18px;
+  overflow:hidden;
+  background:#07111d;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 16px 42px rgba(0,0,0,.38);
+  isolation:isolate;
+}
+.featured-preview::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(90deg,rgba(4,10,18,.94) 0%,rgba(4,10,18,.48) 42%,rgba(4,10,18,.08) 76%,rgba(4,10,18,.35) 100%),
+    linear-gradient(0deg,rgba(4,10,18,.88) 0%,transparent 45%);
+  pointer-events:none;
+}
+.featured-preview img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transform:scale(1.035);
+  transition:opacity .75s ease,transform 6s ease;
+}
+.featured-preview img.visible{
+  opacity:1;
+  transform:scale(1);
+}
+.preview-content{
+  position:absolute;
+  z-index:3;
+  left:28px;
+  right:28px;
+  bottom:24px;
+  max-width:70%;
+}
+.preview-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-bottom:9px;
+  padding:6px 11px;
+  border-radius:999px;
+  background:rgba(37,99,235,.72);
+  border:1px solid rgba(255,255,255,.18);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+.preview-kicker::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 10px rgba(255,255,255,.9);
+}
+.preview-content h2{
+  font-size:clamp(22px,2.4vw,34px);
+  line-height:1.08;
+  margin-bottom:7px;
+  text-shadow:0 3px 14px rgba(0,0,0,.65);
+}
+.preview-content p{
+  font-size:12px;
+  line-height:1.45;
+  color:rgba(255,255,255,.86);
+  max-width:650px;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.preview-counter{
+  position:absolute;
+  z-index:3;
+  top:17px;
+  right:18px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.48);
+  backdrop-filter:blur(8px);
+  font-size:10px;
+  color:rgba(255,255,255,.9);
+  border:1px solid rgba(255,255,255,.12);
+}
+.preview-dots{
+  position:absolute;
+  z-index:3;
+  right:22px;
+  bottom:25px;
+  display:flex;
+  gap:6px;
+  max-width:28%;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.preview-dot{
+  width:6px;
+  height:6px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.38);
+  padding:0;
+  transition:.3s ease;
+}
+.preview-dot.active{
+  width:20px;
+  border-radius:10px;
+  background:#fff;
+}
+.preview-progress{
+  position:absolute;
+  z-index:4;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:3px;
+  background:rgba(255,255,255,.13);
+}
+.preview-progress span{
+  display:block;
+  width:0;
+  height:100%;
+  background:#fff;
+  animation:previewProgress 3s linear infinite;
+}
+@keyframes previewProgress{
+  from{width:0}
+  to{width:100%}
+}
+@media(max-width:900px){
+  .featured-preview{grid-column:span 1;min-height:330px}
+  .preview-content{max-width:82%;left:20px;right:20px;bottom:20px}
+  .preview-dots{right:18px;bottom:20px;max-width:30%}
+}
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;padding:14px}
+  .box{width:100vw;height:100dvh}
+  .featured-preview{min-height:270px;border-radius:14px}
+  .preview-content h2{font-size:20px}
+  .preview-content p{-webkit-line-clamp:2;font-size:11px}
+  .preview-kicker{font-size:9px;padding:5px 9px}
+  .preview-dots{display:none}
+}
 </style></head><body>
-<header><h1>Cine Andina Formaciones</h1></header>
+<header>
+  <div class="cine-header">
+    <!-- LOGO: reemplaza únicamente la URL siguiente por el enlace de tu imagen -->
+    <img class="cine-logo"
+         src="https://i.ibb.co/XxZQKgJX/Copilot-20260605-194138.png"
+         alt="Logo Cine Andina Formaciones">
+    <div class="cine-brand">
+      <h1>Cine Andina Formaciones</h1>
+      <div class="linea"></div>
+      <p>Cinematografía · Formación y Cultura Audiovisual </p>
+    </div>
+  </div>
+</header>
 <div class='search'><input id='buscar' onkeyup='buscarVideos()' placeholder='Buscar'></div>
 <div class='grid' id='galeria'></div>
 <div id='modal'><div class='box'><button class='close' onclick='cerrarVideo()'>✕</button><div class='wrap' id='player'></div></div></div>
@@ -42,9 +263,6 @@ const videos=[
 {titulo:"héroe anónimo - El poder de la actitud positiva - (Cortometraje)",descripcion:"Un joven que realiza pequeños actos de bondad desinteresada, como alimentar a un perro callejero, donar dinero para la educación de una niña pobre y ayudar secretamente a sus vecinos, sin recibir dinero ni reconocimiento a cambio. Aunque las personas a su alrededor lo miran con escepticismo al principio, el protagonista demuestra que su verdadera recompensa es puramente emocional.",portada:"https://i.ibb.co/LXKvqqb6/Copilot-20260803-144612.png",hover:"https://i.ibb.co/KcQQ7s2K/image-4.jpg",id:"1L8QObE8gZLcdVdQXA1BHsaOa-Ftnl4AN"},
 {titulo:"El Empleo (Cortometraje)",descripcion:"narra la rutina matutina de un hombre ordinario en un mundo literal donde los seres humanos son utilizados como objetos de uso cotidiano.",portada:"https://i.ibb.co/FLXXHWfM/image-5.jpg",hover:"https://i.ibb.co/H1ch2yV/image-6.jpg",id:"1LClRSygNd5syL-pNZw_KC5N3IsxmLDRt"},
 {titulo:"El señor indiferente (Cortometraje)",descripcion:"Un hombre de negocios atrapado en el individualismo absoluto. Camina siempre apurado, con las manos metidas en los bolsillos y esquivando la mirada de cualquiera que lo rodee.",portada:"https://i.ibb.co/LzzgGzf8/image-7.jpg",hover:"https://i.ibb.co/S4kJwXyL/image-8.jpg",id:"1nrrd-SnISwgaUPLaCfbb3F6m0W_16L6z"},
-{titulo:"Otra Película",descripcion:"Reemplaza datos.",portada:"https://via.placeholder.com/640x360?text=Portada",hover:"https://via.placeholder.com/640x360/333355/ffffff?text=Hover",id:"ID_DEL_VIDEO"},
-{titulo:"Otra Película",descripcion:"Reemplaza datos.",portada:"https://via.placeholder.com/640x360?text=Portada",hover:"https://via.placeholder.com/640x360/333355/ffffff?text=Hover",id:"ID_DEL_VIDEO"},
-{titulo:"Otra Película",descripcion:"Reemplaza datos.",portada:"https://via.placeholder.com/640x360?text=Portada",hover:"https://via.placeholder.com/640x360/333355/ffffff?text=Hover",id:"ID_DEL_VIDEO"},
 ,{titulo:"Invictus",descripcion:"Invictus es un emotivo drama basado en hechos reales que retrata el poder de la resiliencia humana frente al odio y la división de un país entero. Tras décadas de encierro y opresión, el nuevo presidente decide no buscar venganza, sino unir a su pueblo fracturado sanando las heridas del pasado a través del deporte.",portada:"https://i.ibb.co/WNdb95vd/22954-0.webp",hover:"https://i.ibb.co/DgDQhKFJ/invictus-1024x576.jpg",tipo:"okru",embed:"//ok.ru/videoembed/4080377399911?nochat=1"},
 ,{titulo:"El Ángel azúl (1930)",descripcion:"Narra la ruina moral de un profesor estricto que se obsesiona con una seductora cantante de cabaret.",portada:"https://i.ibb.co/KpyHzZRy/image-9.jpg",hover:"https://i.ibb.co/rGnybFrV/Copilot-20260804-143947.png",tipo:"okru",embed:"//ok.ru/videoembed/7165799303848?nochat=1"},
 ,{titulo:"El secreto de sus ojos",descripcion:"Un agente judicial retirado que busca sanar su pasado escribiendo una novela sobre un brutal y no resuelto asesinato ocurrido en la Argentina de los años 70. A medida que reconstruye la investigación junto a su leal y alcohólico colega Sandoval, Espósito reabre viejas heridas políticas, se enfrenta al dolor eterno del viudo de la víctima y revive un intenso amor inconcluso con su antigua jefa, Irene.",portada:"https://i.ibb.co/Z0zGj3n/Copilot-20260804-150757.png",hover:"https://i.ibb.co/4wFd0PPL/Copilot-20260804-150621.png",tipo:"okru",embed:"//ok.ru/videoembed/3416580164153?nochat=1"},
@@ -65,8 +283,15 @@ const videos=[
 ,{titulo:"El código Enigma",descripcion:"Ambientada principalmente durante la Segunda Guerra Mundial, la trama sigue al genio de la informática Alan Turing y a su equipo de criptógrafos en Bletchley Park en su carrera contrarreloj para descifrar Enigma, una máquina de encriptación teóricamente irrompible usada por el ejército nazi. El éxito de su operación no solo acortó el conflicto global salvando millones de vidas, sino que sentó las bases de la computación moderna. Sin embargo, la película también aborda la dramática injusticia que vivió Turing en la posguerra, cuando fue perseguido y procesado penalmente por el gobierno británico debido a su homosexualidad.",portada:"https://i.ibb.co/G35MXtWt/9036b948c5733bdca2e4f5f2b0a47b8f755a30047ade57f23616f497ae12c0b6.jpg",hover:"https://i.ibb.co/0VJqYXj7/The-Imitation-Game1-1024x681.jpg",tipo:"youtube",embed:"https://www.youtube.com/embed/mts1AOifmzE?si=ZyCVk-mXMyAWLIqW"},
 ,{titulo:"El Perfume Historia de un Asesino",descripcion:"un joven que nació en la miseria absoluta pero bendecido (y maldito) con un olfato extraordinario y sobrehumano. Tras descubrir que él mismo carece de un olor propio, Grenouille se obsesiona de forma enfermiza con capturar la esencia perfecta: el aroma puro de las mujeres jóvenes. Esta búsqueda estética lo lleva a convertirse en un meticuloso asesino en serie.",portada:"https://i.ibb.co/DDQPwMsm/images-original.webp",hover:"https://i.ibb.co/R49gbygC/3-KFPJHWMLJHZ3-GXLQ75-EB5-FT6-M.jpg",tipo:"youtube",embed:"https://www.youtube.com/embed/-wOt1ucLCW0?si=lf9hwQt7dFwG7yx1"},
 ,{titulo:"diarios de motocicleta",descripcion:"La historia retrata el viaje de autodescubrimiento y despertar político que ambos jóvenes emprendieron por América Latina en 1952, mucho antes de que Guevara se convirtiera en un ícono revolucionario.",portada:"https://i.ibb.co/JWtn7trk/Copilot-20260807-182912.png",hover:"https://i.ibb.co/YFp4Wc3L/Copilot-20260807-182629.png",tipo:"youtube",embed:"https://www.youtube.com/embed/X3ejCircfkU?si=Q7RF7QoVT3bSAjxl"},
+,{titulo:"el código da vinci",descripcion:" Cuando el profesor de simbología Robert Langdon es falsamente implicado en un asesinato dentro del Museo del Louvre, se ve obligado a descifrar una intrincada red de acertijos y mensajes ocultos en las obras de Leonardo da Vinci para salvar su vida. Este viaje lo lleva a descubrir que el Santo Grial no es una copa física, sino una línea de sangre sagrada que vincula directamente a Jesucristo con María Magdalena, desafiando frontalmente los dogmas oficiales y el estatus teológico que la Iglesia Católica ha defendido rigurosamente durante siglos.",portada:"https://i.ibb.co/q31fJy3K/image-17.jpg",hover:"https://i.ibb.co/JjGVHsyf/image-18.jpg",tipo:"okru",embed:"//ok.ru/videoembed/6807886172438?nochat=1"},
+,{titulo:"El precio del Tiempo",descripcion:"n un futuro distópico, los seres humanos dejan de envejecer a los 25 años. A partir de ese momento, se activa un reloj digital en su antebrazo con un año de crédito. El tiempo se convierte en la única moneda de cambio para sobrevivir, trabajar y pagar las cuentas. Los ricos acumulan siglos y son casi inmortales, mientras que los pobres viven al día y mueren al agotarse sus segundos.",portada:"https://i.ibb.co/cXRRTZX3/image-15.jpg",hover:"https://i.ibb.co/CK0qHk4V/image-16.jpg",tipo:"okru",embed:"//ok.ru/videoembed/2047172020879?nochat=1"},
+,{titulo:"Milagros inesperados",descripcion:"La historia está ambientada en 1935 en el corredor de la muerte de la penitenciaría de Cold Mountain, apodado La milla verde debido al color del suelo. La rutina del guardia jefe Paul Edgecomb cambia drásticamente cuando llega John Coffey, un afroamericano de gran tamaño acusado de un crimen atroz. A pesar de su imponente físico, Coffey resulta ser un hombre ingenuo, bondadoso y temeroso de la oscuridad que posee un don divino sobrenatural para curar enfermedades y absorber el dolor ajeno. Al ser testigos de sus milagros, los guardias comienzan a experimentar un profundo dilema moral sobre la inminente ejecución de un alma tan inocente.",portada:"https://i.ibb.co/gNkVSqq/image-20.jpg",hover:"https://i.ibb.co/VK5nFFP/image-19.jpg",tipo:"okru",embed:"//ok.ru/videoembed/284773452419?nochat=1"},
+,{titulo:"Yo Soy Sam",descripcion:"un padre con discapacidad intelectual que cría con amor a su hija Lucy. Cuando la niña cumple siete años y supera la capacidad mental de su padre, las autoridades intervienen para retirarle la custodia, obligando a Sam a luchar legalmente con la ayuda de una abogada.",portada:"https://i.ibb.co/XkYvbC0Y/image-21.jpg",hover:"https://i.ibb.co/YB87XgwT/image-22.jpg",tipo:"okru",embed:"https://www.youtube.com/embed/X3ejCircfkU?si=Q7RF7QoVT3bSAjxl"},
+,{titulo:"¡huye!",descripcion:"Un joven afroamericano llamado Chris visita la finca de la familia de su novia blanca. Lo que parece un incómodo fin de semana de presentación se convierte en una pesadilla cuando descubre un siniestro secreto Hipnótico relacionado con la desaparición de personas de color en la zona.",portada:"https://i.ibb.co/27XGNB9x/image-23.jpg",hover:"https://i.ibb.co/ds2GWzG0/huye-get-out-pelicula.jpg",tipo:"okru",embed:"//ok.ru/videoembed/7872801278624?nochat=1"},
+,{titulo:"siempre a tu lado",descripcion:"narra la conmovedora historia real de un profesor de música, que encuentra un cachorro de raza Akita abandonado en una estación de tren. Parker lo adopta y nombra Hachi, forjando un lazo de amor inquebrantable que perdura incluso tras una trágica pérdida.",portada:"https://i.ibb.co/1G0tZZz3/siempre-a-tu-lado-pelicula-1.jpg",hover:"https://i.ibb.co/MyNfZ77X/siempre-a-tu-lado-pelicula-2.jpg",tipo:"okru",embed:"//ok.ru/videoembed/2780734622348?nochat=1"},
+,{titulo:"El Origen",descripcion:"Un joven afroamericano llamado Chris visita la finca de la familia de su novia blanca. Lo que parece un incómodo fin de semana de presentación se convierte en una pesadilla cuando descubre un siniestro secreto Hipnótico relacionado con la desaparición de personas de color en la zona.",portada:"https://i.ibb.co/PzhLZPrS/image-25.jpg",hover:"https://i.ibb.co/NnmPc8Hg/F35-UYGKDAZH53-PRC7-CZX3-NO5-MQ.avif",tipo:"okru",embed:"//ok.ru/videoembed/6787289385685?nochat=1"},
+,{titulo:"Wonder",descripcion:"narra la vida de un niño de 10 años con una grave malformación facial (síndrome de Treacher Collins). Tras años de estudio en casa y múltiples cirugías, se enfrenta al reto de ir por primera vez a la escuela, donde busca la aceptación de sus compañeros.",portada:"https://i.ibb.co/v6dyP3LY/image-24.jpg",hover:"https://i.ibb.co/yFQ8JFgS/unnamed-1536x864.jpg",tipo:"youtube",embed:"https://www.youtube.com/embed/PstPEtoByLQ?si=C11vXTPakSxtuQXV"},
 ];
-
 
 function normalizarYoutube(url){
   try{
@@ -84,6 +309,112 @@ function normalizarYoutube(url){
   }catch(e){return null}
 }
 
+let previewTimer=null;
+let previewIndex=0;
+let previewImages=[];
+let previewEl=null;
+
+function prepararPreview(){
+  previewImages=[];
+  videos.forEach((v,i)=>{
+    if(v.portada) previewImages.push({src:v.portada,index:i,tipo:"Portada"});
+    if(v.hover) previewImages.push({src:v.hover,index:i,tipo:"Hover"});
+  });
+}
+
+function iniciarPreview(){
+  prepararPreview();
+  if(!previewImages.length)return;
+
+  const old=document.querySelector('.featured-preview');
+  if(old)old.remove();
+
+  const primerCard=galeria.querySelector('.card.video');
+  if(!primerCard)return;
+
+  const preview=document.createElement('section');
+  preview.className='featured-preview';
+  preview.setAttribute('aria-label','Vista previa de películas');
+  preview.innerHTML=`
+    <img id="previewImgA" src="${previewImages[0].src}" alt="">
+    <img id="previewImgB" src="" alt="">
+    <div class="preview-counter" id="previewCounter"></div>
+    <div class="preview-content">
+      <span class="preview-kicker" id="previewTipo">Vista previa</span>
+      <h2 id="previewTitulo"></h2>
+      <p id="previewDescripcion"></p>
+    </div>
+    <div class="preview-dots" id="previewDots"></div>
+    <div class="preview-progress"><span id="previewProgressBar"></span></div>
+  `;
+
+  // Se coloca después de la primera película para ocupar exactamente
+  // el espacio de las dos tarjetas superiores señaladas.
+  primerCard.insertAdjacentElement('afterend', preview);
+  previewEl=preview;
+
+  const dots=document.getElementById('previewDots');
+  videos.forEach((v,i)=>{
+    const d=document.createElement('button');
+    d.className='preview-dot';
+    d.type='button';
+    d.title=v.titulo;
+    d.setAttribute('aria-label','Mostrar '+v.titulo);
+    d.onclick=()=>{
+      const pos=previewImages.findIndex(x=>x.index===i);
+      if(pos>=0){
+        previewIndex=pos;
+        mostrarPreview(true);
+      }
+    };
+    dots.appendChild(d);
+  });
+
+  previewIndex=0;
+  mostrarPreview(false);
+
+  clearInterval(previewTimer);
+  previewTimer=setInterval(()=>{
+    previewIndex=(previewIndex+1)%previewImages.length;
+    mostrarPreview(true);
+  },3000);
+}
+
+function mostrarPreview(animar=true){
+  if(!previewEl || !previewImages.length)return;
+
+  const item=previewImages[previewIndex];
+  const v=videos[item.index];
+  const a=document.getElementById('previewImgA');
+  const b=document.getElementById('previewImgB');
+
+  const actual=previewEl.dataset.active==="b" ? b : a;
+  const siguiente=actual===a ? b : a;
+
+  siguiente.src=item.src;
+  siguiente.classList.add('visible');
+  actual.classList.remove('visible');
+
+  previewEl.dataset.active=actual===a ? "b" : "a";
+
+  document.getElementById('previewTitulo').textContent=v.titulo;
+  document.getElementById('previewDescripcion').textContent=v.descripcion;
+  document.getElementById('previewTipo').textContent=item.tipo+" · vista previa";
+  document.getElementById('previewCounter').textContent=
+    (previewIndex+1)+" / "+previewImages.length;
+
+  document.querySelectorAll('.preview-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===item.index);
+  });
+
+  const bar=document.getElementById('previewProgressBar');
+  if(bar){
+    bar.style.animation='none';
+    void bar.offsetWidth;
+    bar.style.animation='previewProgress 3s linear infinite';
+  }
+}
+
 function cargar(){
   galeria.innerHTML=videos.map((v,i)=>{
     return `<div class="card video">
@@ -95,6 +426,8 @@ function cargar(){
       <div class="info"><h2>${v.titulo}</h2><p>${v.descripcion}</p></div>
     </div>`;
   }).join('');
+
+  iniciarPreview();
 }
 
 function abrirVideo(index){
@@ -139,7 +472,15 @@ function abrirVideo(index){
 
 function cerrarVideo(){modal.classList.remove("active");player.innerHTML=""}
 modal.onclick=e=>{if(e.target===modal)cerrarVideo()}
-function buscarVideos(){let q=buscar.value.toLowerCase();document.querySelectorAll('.video').forEach(v=>v.style.display=v.innerText.toLowerCase().includes(q)?'':'none')}
+function buscarVideos(){
+  let q=buscar.value.toLowerCase().trim();
+  document.querySelectorAll('.video').forEach(v=>{
+    v.style.display=v.innerText.toLowerCase().includes(q)?'':'none';
+  });
+  const preview=document.querySelector('.featured-preview');
+  if(preview) preview.style.display=q?'none':'';
+}
 cargar();
 </script></body></html>
+
 
